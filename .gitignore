@@ -63,3 +63,5 @@ typings/
 
 # personal git config
 .gitconfig
+# sqlite test db
+sqlite/crud/lib/db
