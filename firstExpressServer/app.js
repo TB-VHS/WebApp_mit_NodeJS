@@ -46,16 +46,18 @@ app.get( '/login', ( req, res )=>{
 app.post( '/login', ( req, res )=>{
   // check username & password
   util.log(  'body:',  util.inspect( req.body ))
-  if( req.body.first_name + ' ' + req.body.last_name == userData.displayName ){
-    req.session.current_user = { 'authenticated': true, 'name': 'Tom' }
-    res.redirect( '/content' )
+  if( req.body.email == userData.email ){
+    if( req.body.password == userData.password ){
+      req.session.currentUser = { 'authenticated': true, 'userName': userData.displayName }
+      res.redirect( '/content' )
+    }
   } else {
     res.redirect( '/' )
   }
 })
 
 app.get( '/content', ( req, res )=>{
-  util.log( util.inspect( req.session.current_user ))
+  util.log( util.inspect( req.session.currentUser ))
   res.render( 'content', { title: 'Content' } )
 })
 
