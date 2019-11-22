@@ -4,6 +4,7 @@ const path = require( 'path' )
 const util = require( 'util' )
 
 const express = require( 'express' )
+const sqlite3 = require( 'sqlite3' ).verbose()
 
 const app = express()
 const hbs = require('express-handlebars')
@@ -11,6 +12,7 @@ const bodyParser = require( 'body-parser' )
 var session = require( 'express-session' )
 
 const port = 3000
+,     conf = { dbName: 'callipro', tableName: 'users' }
 
 var userData = require( './lib/user_data' )
 
@@ -46,19 +48,33 @@ app.get( '/login', ( req, res )=>{
 app.post( '/login', ( req, res )=>{
   // check username & password
   util.log(  'body:',  util.inspect( req.body ))
-  if( req.body.email == userData.email ){
-    if( req.body.password == userData.password ){
-      req.session.currentUser = { 'authenticated': true, 'userName': userData.displayName }
+  let db = new sqlite3.Database( `./db/${ conf.dbName }.db`, sqlite3.OPEN_READWRITE, ( err )=>{
+    if( err ){ console.error( err.message )}
+    console.log( `Connected to the ${ conf.dbName } database.` )
+  })
+
+  db.each( `SELECT * FROM ${ conf.tableName } WHERE email='${ req.body.email }'`, ( err, row )=>{
+    if( err ){ console.error( err.message )}
+// Datensatz verarbeiten --->
+    util.log( `row ${ row.id }: ${ util.inspect( row )}` )
+
+    if( req.body.password == row.password ){
+      req.session.currentUser = {
+        'authenticated':  true
+      , 'email':          row.email
+      , 'displayName':    row.displayName
+      }
       res.redirect( '/content' )
+    } else {
+      res.redirect( '/' )
     }
-  } else {
-    res.redirect( '/' )
-  }
+// <---
+  })
 })
 
 app.get( '/content', ( req, res )=>{
   util.log( util.inspect( req.session.currentUser ))
-  res.render( 'content', { title: 'Content' } )
+  res.render( 'content', { title: 'Content', displayName: req.session.currentUser.displayName } )
 })
 
 
