@@ -1,11 +1,37 @@
-<h1>Hallo {{ displayName }}</h1>
+<nav>
+  <div class="nav-wrapper light-blue darken-3">
+    <a href="#!" class="brand-logo">
+      <i class="material-icons">grid_on</i>
+      {{ displayName }}
+      - {{ monatJetzt }}
+    </a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#"><i class="material-icons">chevron_left</i></a></li>
+      <li><a href="#"><i class="material-icons">chevron_right</i></a></li>
+    </ul>
+  </div>
+</nav>
+
 <div id="main">
-  {{#each kalenderTage}}
-    {{#if this.calTag}}
-      <div>
-        {{ this.calTag.wochentag }}
-        {{ this.calTag.tageszahl }}
-      </div>
-    {{/if}}
-  {{/each}}
+      <table class="striped">
+        <tbody>
+          {{#each kalenderTage as |tag i| }}
+            {{#if this.calTag}}
+              <tr>
+                <td class="tageszahl">
+                  {{ this.calTag.tageszahl }}
+                </td>
+                <td class="wochentag">
+                  {{ this.calTag.wochentag }}
+                </td>
+                <td class="termin">
+                  <div id="{{ this.epoche }}">
+                  </div>
+                </td>
+
+              </tr>
+            {{/if}}
+          {{/each}}
+        </tbody>
+      </table>
 </div>

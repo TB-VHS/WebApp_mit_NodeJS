@@ -53,7 +53,7 @@ app.post( '/login', ( req, res )=>{
     console.log( `Connected to the ${ conf.dbName } database.` )
   })
 
-  db.each( `SELECT * FROM ${ conf.tableName } WHERE email='${ req.body.email }'`, ( err, row )=>{
+  db.each( `SELECT * FROM users WHERE email='${ req.body.email }'`, ( err, row )=>{
     if( err ){ console.error( err.message )}
 // Datensatz verarbeiten --->
     util.log( `row ${ row.id }: ${ util.inspect( row )}` )
@@ -74,12 +74,26 @@ app.post( '/login', ( req, res )=>{
 
 app.get( '/kalender', ( req, res )=>{
   util.log( util.inspect( req.session.currentUser ))
-  var dateNow = new Date()
-  res.render( 'kalender'
-            , { title:        'callipro'
-              , displayName:  req.session.currentUser.displayName
-              , kalenderTage: helpers.kalenderMonat( dateNow.getFullYear(), dateNow.getMonth() + 1 )
-              })
+  var dateNow     = new Date()
+  ,   monatJetzt  = dateNow.toLocaleDateString( 'de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).split(' ')[ 2 ]
+
+
+  let db = new sqlite3.Database( `./db/${ conf.dbName }.db`, sqlite3.OPEN_READWRITE, ( err )=>{
+    if( err ){ console.error( err.message )}
+    console.log( `Connected to the ${ conf.dbName } database.` )
+  })
+  db.all( `SELECT * FROM dates WHERE year='${ dateNow.getFullYear() }' AND month='${ dateNow.getMonth() }'`, ( err, allRows )=>{
+    if( err ){ console.error( err.message )}
+// Datensatz verarbeiten --->
+    util.log( `allRows: ${ util.inspect( allRows )}` )
+    res.render( 'kalender'
+              , { title:        'callipro'
+                , monatJetzt:   monatJetzt
+                , displayName:  req.session.currentUser.displayName
+                , kalenderTage: helpers.kalenderMonat( dateNow.getFullYear(), dateNow.getMonth() + 1 )
+                })
+  })
+
 })
 
 
