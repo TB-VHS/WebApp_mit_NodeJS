@@ -1,0 +1,11 @@
+<h1>Hallo {{ displayName }}</h1>
+<div id="main">
+  {{#each kalenderTage}}
+    {{#if this.calTag}}
+      <div>
+        {{ this.calTag.wochentag }}
+        {{ this.calTag.tageszahl }}
+      </div>
+    {{/if}}
+  {{/each}}
+</div>

@@ -14,7 +14,7 @@ var session = require( 'express-session' )
 const port = 3000
 ,     conf = { dbName: 'callipro', tableName: 'users' }
 
-var userData = require( './lib/user_data' )
+var helpers = require( './lib/app_helpers' )
 
 /* --- middleware --- */
 app.use( express.static( path.join( __dirname, 'public' )))
@@ -64,7 +64,7 @@ app.post( '/login', ( req, res )=>{
       , 'email':          row.email
       , 'displayName':    row.displayName
       }
-      res.redirect( '/content' )
+      res.redirect( '/kalender' )
     } else {
       res.redirect( '/' )
     }
@@ -72,12 +72,18 @@ app.post( '/login', ( req, res )=>{
   })
 })
 
-app.get( '/content', ( req, res )=>{
+app.get( '/kalender', ( req, res )=>{
   util.log( util.inspect( req.session.currentUser ))
-  res.render( 'content', { title: 'Content', displayName: req.session.currentUser.displayName } )
+  var dateNow = new Date()
+  res.render( 'kalender'
+            , { title:        'callipro'
+              , displayName:  req.session.currentUser.displayName
+              , kalenderTage: helpers.kalenderMonat( dateNow.getFullYear(), dateNow.getMonth() + 1 )
+              })
 })
 
 
+app.get
 
 /* --- server start --- */
 app.listen( port, () => console.log( `Example app listening on port ${port}!` ))
