@@ -3,8 +3,10 @@
 </ul>
 <nav>
   <div class="nav-wrapper light-blue darken-3">
-    <a class="dropdown-trigger" href="#!" data-target="dropdown-left"><i class="large material-icons left">more_vert</i></a>
-    <div class="brand-logo center"><h4>{{ displayName }} - {{ monatJetzt }}</h4></div>
+    <div class="brand-logo left">
+      <a class="dropdown-trigger" href="#!" data-target="dropdown-left"><i class="large material-icons left">more_vert</i></a>
+      &nbsp;{{ displayName }} - {{ monatJetzt }}
+    </div>
     <ul class="right">
       <li><a href="#"><i class="material-icons">chevron_left</i></a></li>
       <li><a href="#"><i class="material-icons">chevron_right</i></a></li>
@@ -13,27 +15,37 @@
 </nav>
 
 <div id="main">
-      <table class="striped">
-        <tbody>
-          {{#each kalenderTage as |tag i| }}
-            {{#if this.calTag}}
-              <tr>
-                <td class="tageszahl">
-                  {{ this.calTag.tageszahl }}
-                </td>
-                <td class="wochentag">
-                  {{ this.calTag.wochentag }}
-                </td>
-                <td class="termin">
-                  <div id="{{ this.epoche }}">
-                  </div>
-                </td>
 
-              </tr>
-            {{/if}}
-          {{/each}}
-        </tbody>
-      </table>
+  <div class="row">
+  {{#each kalenderTage as |tag i| }}
+
+    {{{weekOpen i }}}
+
+    <div class=" col s1">
+      <div class="card teal lighten-5">
+        <div class="card-content">
+          {{#if tag.calTag}}
+            <span class="card-title">
+              <span class="tageszahl">{{ tag.calTag.tageszahl }}</span> {{ tag.calTag.wochentag }}
+            </span>
+            <p id="{{ tag.epoche }}"></p>
+
+          {{else}}
+            <span class="card-title">
+              -
+            </span>
+            <p></p>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+
+    {{{weekClose i }}}
+
+  {{/each}}
+
+  </div>
+
 </div>
 <script charset="utf-8">
   $(".dropdown-trigger").dropdown();

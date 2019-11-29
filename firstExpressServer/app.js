@@ -22,7 +22,12 @@ app.use( express.static( path.join( __dirname, 'public' )))
 app.use( bodyParser.json() )
 app.use( bodyParser.urlencoded({ extended: true }))
 
-app.engine('handlebars', hbs())
+app.engine('handlebars', hbs({
+  helpers: {
+    weekOpen: function( d ){ return ( d % 7 === 0 ) ? '<div class="row">' : '' }
+  , weekClose: function( d ){ return ( ( 1 + d ) % 7 === 0 ) ? '</div>' : '' }
+  }
+}))
 app.set('view engine', 'handlebars')
 
 app.use(session({

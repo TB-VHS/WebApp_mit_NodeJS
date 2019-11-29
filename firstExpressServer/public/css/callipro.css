@@ -1,11 +1,13 @@
-
-table {
-  font-size:    20px;
+html body #main {
+  height: 100%;
 }
 
 
+.card {
+  height:   12vh;
+}
+
 .tageszahl {
-  width:        10%;
-  padding-left: 15px;
-  font-size:    24px;
+  /* font-size:    24px; */
+  font-weight:  bold;
 }
