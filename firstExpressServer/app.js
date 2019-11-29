@@ -45,6 +45,13 @@ app.get( '/login', ( req, res )=>{
   res.render( 'login', { title: 'Login' } )
 })
 
+app.get( '/logout', ( req, res )=>{
+  req.session.destroy(( err )=>{
+    if( err ){ console.error( err.message )}
+    res.redirect( '/login' )
+  })
+})
+
 app.post( '/login', ( req, res )=>{
   // check username & password
   util.log(  'body:',  util.inspect( req.body ))

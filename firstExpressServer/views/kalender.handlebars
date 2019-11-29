@@ -1,11 +1,11 @@
+<ul id="dropdown-left" class="dropdown-content">
+  <li><a href="/logout">logout</a></li>
+</ul>
 <nav>
   <div class="nav-wrapper light-blue darken-3">
-    <a href="#!" class="brand-logo">
-      <i class="material-icons">grid_on</i>
-      {{ displayName }}
-      - {{ monatJetzt }}
-    </a>
-    <ul class="right hide-on-med-and-down">
+    <a class="dropdown-trigger" href="#!" data-target="dropdown-left"><i class="large material-icons left">more_vert</i></a>
+    <div class="brand-logo center"><h4>{{ displayName }} - {{ monatJetzt }}</h4></div>
+    <ul class="right">
       <li><a href="#"><i class="material-icons">chevron_left</i></a></li>
       <li><a href="#"><i class="material-icons">chevron_right</i></a></li>
     </ul>
@@ -35,3 +35,6 @@
         </tbody>
       </table>
 </div>
+<script charset="utf-8">
+  $(".dropdown-trigger").dropdown();
+</script>
