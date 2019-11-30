@@ -11,3 +11,6 @@ html body #main {
   /* font-size:    24px; */
   font-weight:  bold;
 }
+.tageszahl:after {
+  content: ".";
+}
