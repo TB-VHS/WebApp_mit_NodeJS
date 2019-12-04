@@ -12,7 +12,9 @@ const bodyParser = require( 'body-parser' )
 var session = require( 'express-session' )
 
 const port = 3000
-,     conf = { dbName: 'callipro', tableName: 'users' }
+,     conf = { dbName: 'callipro' }
+// require( 'dotenv' ).config()
+
 
 var helpers = require( './lib/app_helpers' )
 
