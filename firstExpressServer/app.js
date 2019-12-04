@@ -26,6 +26,15 @@ app.engine('handlebars', hbs({
   helpers: {
     weekOpen: function( d ){ return ( d % 7 === 0 ) ? '<div class="row">' : '' }
   , weekClose: function( d ){ return ( ( 1 + d ) % 7 === 0 ) ? '</div>' : '' }
+  , weekdayColor: function( d ){
+      var color = '';
+      switch( d % 7 ){
+        case 5: color += 'amber-text text-darken-2 grey lighten-5'; break;
+        case 6: color += 'red-text grey lighten-5'; break;
+        default: color += 'blue-text grey lighten-5';
+      }
+      return color;
+    }
   }
 }))
 app.set('view engine', 'handlebars')
