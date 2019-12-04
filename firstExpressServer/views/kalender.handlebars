@@ -29,11 +29,10 @@
               <span class="tageszahl">{{ tag.calTag.tageszahl }}</span> {{ tag.calTag.wochentag }}
             </span>
             <p id="{{ tag.epoche }}">
-               <a class="btn-floating btn-small right waves-effect waves-light lime accent-1"><i class="material-icons teal-text text-darken-4">list</i></a>
                 {{#if tag.dates }}
                   <ul id="{{ tag.datum }}">
                     {{#each tag.dates }}
-                      <li class="truncate">{{ this.subject }}</li>
+                      <li class="truncate">{{ this.hour }}:{{ this.minute }} ⏰ {{ this.subject }}</li>
                     {{/each }}
                   </ul>
                 {{else}}

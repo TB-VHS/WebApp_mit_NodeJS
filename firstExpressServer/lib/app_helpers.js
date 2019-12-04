@@ -23,7 +23,11 @@ module.exports = {
                       var   dates     = []
                       datesRows.forEach(( row ) => {
                         if( parseInt( row.day ) === dayNumber ){
-                          dates.push({ epoche: row.id, hour: row.hour, minute: row.minute, subject: row.subject })
+                          dates.push({  epoche:   row.id
+                                      , hour:     _.padStart( row.hour, 2, '0' )
+                                      , minute:   _.padStart( row.minute, 2, '0' )
+                                      , subject:  row.subject
+                                      })
                         }
                       })
 
