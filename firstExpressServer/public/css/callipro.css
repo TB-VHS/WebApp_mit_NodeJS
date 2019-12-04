@@ -9,7 +9,11 @@ html body #main {
   padding:        2px 5px !important;
 }
 .card-content p {
-  font-size:      8px !important;
+  font-size:      10px !important;
+}
+
+.card-content ul {
+  list-style-type: square !important;
 }
 
 .card-title {

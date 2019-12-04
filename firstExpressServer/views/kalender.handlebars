@@ -30,7 +30,16 @@
             </span>
             <p id="{{ tag.epoche }}">
                <a class="btn-floating btn-small right waves-effect waves-light teal lighten-5"><i class="material-icons teal-text text-darken-4">list</i></a>
-              <ul id="{{ tag.datum }}"></ul>
+                {{#if tag.dates }}
+                  <ul id="{{ tag.datum }}">
+                    {{#each tag.dates }}
+                      <li class="truncate">{{ this.subject }}</li>
+                    {{/each }}
+                  </ul>
+                {{else}}
+                  <span class="grey-text text-lighten-1">keine Termine</span>
+                {{/if }}
+
             </p>
 
           {{else}}

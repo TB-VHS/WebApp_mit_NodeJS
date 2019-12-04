@@ -106,19 +106,17 @@ app.get( '/kalender', ( req, res )=>{
   db.all( `SELECT * FROM dates WHERE year='${ dateNow.getFullYear() }' AND month='${ dateNow.getMonth() }'`, ( err, allRows )=>{
     if( err ){ console.error( err.message )}
 // Datensatz verarbeiten --->
-    util.log( `allRows: ${ util.inspect( allRows )}` )
+    // util.log( `allRows: ${ util.inspect( allRows )}` )
     res.render( 'kalender'
               , { title:        'callipro'
                 , monatJetzt:   monatJetzt
                 , displayName:  req.session.currentUser.displayName
-                , kalenderTage: helpers.kalenderMonat( dateNow.getFullYear(), dateNow.getMonth() + 1 )
+                , kalenderTage: helpers.kalenderMonat( dateNow.getFullYear(), dateNow.getMonth() + 1, allRows )
                 })
   })
 
 })
 
-
-app.get
 
 /* --- server start --- */
 app.listen( port, () => console.log( `Example app listening on port ${port}!` ))
