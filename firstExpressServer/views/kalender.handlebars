@@ -26,7 +26,8 @@
         <div class="card-content">
           {{#if tag.calTag}}
             <span class="card-title {{{weekdayColor i }}}">
-              <span class="tageszahl">{{ tag.calTag.tageszahl }}</span> {{ tag.calTag.wochentag }}
+              <span class="tageszahl">{{ tag.calTag.tageszahl }}</span> {{ tag.calTag.wochentag }} 
+              <a id="{{{ tag.datum }}}" class="btn-tag btn-floating btn-small waves-effect waves-light blue lighten-4 right"><i class="material-icons blue-grey-text">fullscreen</i></a>
             </span>
             <p id="{{ tag.epoche }}">
                 {{#if tag.dates }}
@@ -56,8 +57,34 @@
   {{/each}}
 
   </div>
-
 </div>
+<div id="kalender-modal" class="modal">
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+
+
 <script charset="utf-8">
-  $(".dropdown-trigger").dropdown();
+  $( ".dropdown-trigger" ).dropdown();
+  $( '.modal' ).modal();
+  $( '.btn-tag' ).click( function(){
+    var datum = $( this ).prop( 'id' );
+
+    $( '#kalender-modal' ).load( '/kalender_tag'
+                                , { 
+                                    action:  'retrieve'
+                                  , datum:   datum
+                                  }
+                                , function(){ 
+                                    console.log( 'kalender_tag loaded' );
+                                    $( '#kalender-modal' ).modal( 'open' );
+                                  }
+                                );
+
+  })
 </script>

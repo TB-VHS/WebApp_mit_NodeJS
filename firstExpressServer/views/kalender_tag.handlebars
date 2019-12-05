@@ -1,0 +1,12 @@
+<div id="kalender-tag">
+  <ul class="collection with-header">
+    <li class="collection-header"><h4>{{ title }}</h4></li>
+    {{#if dates }}
+      {{#each dates }}
+        <li class="collection-item">{{ this.hour }}:{{ this.minute }} ⏰ {{ this.subject }}</li>
+      {{/each }}
+      {{else}}
+        <li class="collection-item grey-text">keine Termine</li>
+      {{/if }}
+    </ul>
+</div>

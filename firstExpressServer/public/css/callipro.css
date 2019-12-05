@@ -28,7 +28,6 @@ html, body, #main {
 }
 
 .card-title {
-  /*padding:        2px 5px !important;*/
   font-size:      10px;
   text-align:     center;
   border-bottom:  1px solid #aaaaaa;
@@ -39,4 +38,9 @@ html, body, #main {
 }
 .tageszahl:after {
   content:        ".";
+}
+
+#kalender-tag {
+  padding:        5vh 10vh;
+  border-radius:  2vh;
 }
