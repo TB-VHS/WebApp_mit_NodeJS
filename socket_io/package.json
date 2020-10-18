@@ -1,0 +1,22 @@
+{
+  "name": "socket_io",
+  "version": "1.0.0",
+  "description": "first socket.io project",
+  "main": "app.js",
+  "dependencies": {
+    "dotenv": "latest",
+    "express": "latest",
+    "express-handlebars": "latest",
+    "socket.io": "latest"
+  },
+  "devDependencies": {
+    "nodemon": "latest"
+  },
+  "scripts": {
+    "devel": "nodemon -L app.js"
+  , "start": "node app.js"
+  , "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "T.",
+  "license": "MIT"
+}
